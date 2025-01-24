@@ -20,8 +20,7 @@ Other ambitions included having NPC party member allies you can control alongsid
 
 There are a fair few unfinished/unused variables and methods and constructors. I do not pretend this is a flawlessly built project, but it's mine, and I put a lot of effort into it, and learned a lot. I was also setting it up to potentially be expanded on down the line.
 
-To begin, 
-(sql nonsense)
+To begin, create a server in MySQL database and import the scheme included in dungeoncrawler/data called "dungeoncrawler.sql." This should create the database the game will need to run.
 
 Then, in the DungeonCrawler/data folder, create a txt file named "connectionString" without quotes.
 In it, paste the following and only the following using any text editor (without quotes):
