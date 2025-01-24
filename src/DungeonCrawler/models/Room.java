@@ -791,15 +791,15 @@ public class Room {
                             && playerTurnCount <= (this.getMonsters().size() / 2)) {
                         playerTurnCount++;
                         this.playerTurn(pc);
-                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null) {
+                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
-                        } else if (!this.getMonsters().isEmpty()) {
+                        } else if (!this.getMonsters().isEmpty() && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
                         }
                     } else {
-                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null) {
+                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
-                        } else if (!this.getMonsters().isEmpty()) {
+                        } else if (!this.getMonsters().isEmpty() && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
                         }
                         playerTurnCount++;
@@ -1002,7 +1002,7 @@ public class Room {
                                 if (playerDoDamage(pc,
                                         this.getMonsters().get((attackChoice - 1)),
                                         pc.getMoves().get((moveChoice - 1)))) {
-                                    this.getMonsters().remove(this.getMonsters().get((attackChoice - 1)));
+                                    this.getMonsters().get((attackChoice - 1)).setDead(true);
                                 }
 
                                 // End loop and return true to the main doBattle method so the player's turn ends

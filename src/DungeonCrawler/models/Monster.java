@@ -42,6 +42,9 @@ public class Monster {
     // boolean to handle defense calculations in combat; set to false by default for safety
     boolean defending = false;
 
+    // boolean to handle a monster being dead
+    boolean dead = false;
+
     /// Constructors
 
     public Monster() {
@@ -162,6 +165,14 @@ public class Monster {
 
     public void setDefending(boolean defending) {
         this.defending = defending;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 
     // toString method to print the monster tidily for the player
