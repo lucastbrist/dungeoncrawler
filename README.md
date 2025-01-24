@@ -15,7 +15,9 @@ Otherwise, you can type literally anything else on the screen that lets you begi
 There are lots of fun calculations going on behind the scenes that I implore anyone to dig around in and look at. On the surface, it's quite simple (and compared to AAA games, of course, it still is), but there's some cool and complex character building that can be done for how simple it is, and a lot of runtime randomization that goes on with stats and other numbers.
 
 An intended "final product" of this basic concept would have 20 enemy themes with 4-10 monsters each, each with their own moves and level progression, as well as around 50 each of armors and weapons and magical trinkets. There would be a tutorial, followed by you traversing through 3-5 rooms of a dungeon and then the boss room, fighting a unique boss enemy. If you survive, the dungeon is cleared, your stats are printed, and you are prompted with the choice of either retiring your adventurer or taking them to a new dungeon.
-This proof of concept has no tutorial and only one functioning enemy theme and only placeholder items and no boss rooms.
+
+This proof of concept has no tutorial, only one functioning enemy theme, only placeholder items, and no boss rooms.
+
 Other ambitions included having NPC party member allies you can control alongside your player, sub-classes to specialize into after your initial choice of the main three archetypes, unique non-combat encounters, more interactivity to rooms, less generous level ups, a hub area to return to between dungeons and sell and buy gear, and linear, pre-built campaigns with specific characters and dungeons. But I'll save that for some Unreal Engine project, probably, where I have to build less from scratch. Lol.
 
 There are a fair few unfinished/unused variables and methods and constructors. I do not pretend this is a flawlessly built project, but it's mine, and I put a lot of effort into it, and learned a lot. I was also setting it up to potentially be expanded on down the line.
