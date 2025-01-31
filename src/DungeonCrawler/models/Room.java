@@ -275,7 +275,7 @@ public class Room {
                     continue;
                 }
 
-            } else {
+            } if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size()) {
                 System.out.println("You seem to be alone in this room.");
                 System.out.println("What do you do?");
                 System.out.println("1. Inspect");
@@ -1247,8 +1247,10 @@ public class Room {
                                                 if (this.getRoomTrinket().trinketCollected(pc)) {
                                                     this.setRoomTrinket(tempTrinket);
                                                 }
+                                                deciding = false;
                                                 break;
                                             case 2:
+                                                deciding = false;
                                                 break;
                                         }
 
@@ -1281,8 +1283,10 @@ public class Room {
                                                 if (this.getRoomWeapon().weaponCollected(pc)) {
                                                     this.setRoomWeapon(tempWeapon);
                                                 }
+                                                deciding = false;
                                                 break;
                                             case 2:
+                                                deciding = false;
                                                 break;
                                         }
 
@@ -1315,8 +1319,10 @@ public class Room {
                                                 if (this.getRoomArmor().armorCollected(pc)) {
                                                     this.setRoomArmor(tempArmor);
                                                 }
+                                                deciding = false;
                                                 break;
                                             case 2:
+                                                deciding = false;
                                                 break;
                                         }
 
@@ -1346,8 +1352,10 @@ public class Room {
                                         switch (decision) {
                                             case 1:
                                                 pc.setPotions(pc.getPotions() + this.getPotions());
+                                                deciding = false;
                                                 break;
                                             case 2:
+                                                deciding = false;
                                                 break;
                                         }
 
@@ -1361,9 +1369,9 @@ public class Room {
                             System.out.println("You see no potions in this room.");
                         }
 
-                        continue;
                     case 0:
                         return false;
+
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
                         continue;
