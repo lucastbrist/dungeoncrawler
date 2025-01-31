@@ -471,7 +471,7 @@ public class Room {
 
                 resultSet = statement
                         .executeQuery("select * from dungeoncrawler."
-                                + this.getTheme()
+                                + this.getTheme().toLowerCase()
                                 + " WHERE Tier between 1 and " + (pc.getLevel() + generatedModifier)
                                 + " AND Type = " + generatedType
                                 + " LIMIT " + pc.getLevel());
