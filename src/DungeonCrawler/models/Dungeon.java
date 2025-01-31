@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import static DungeonCrawler.controllers.DungeonCrawlController.StringStore.connectionString;
 
 public class Dungeon {
 
@@ -105,19 +106,6 @@ public class Dungeon {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
 
             // Set up the connection with the DB
             connection = DriverManager

@@ -1,16 +1,14 @@
 package DungeonCrawler.models;
 
 import DungeonCrawler.controllers.DungeonCrawlController;
+import com.sun.security.jgss.GSSUtil;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
+import static DungeonCrawler.controllers.DungeonCrawlController.StringStore.connectionString;
 
 public class Room {
 
@@ -24,6 +22,7 @@ public class Room {
     Armor roomArmor;
     Weapon roomWeapon;
     int potions;
+    int deadCount;
 
     public Room() {
     }
@@ -125,11 +124,19 @@ public class Room {
         this.potions = potions;
     }
 
+    public int getDeadCount() {
+        return deadCount;
+    }
+
+    public void setDeadCount(int deadCount) {
+        this.deadCount = deadCount;
+    }
+
     public void generateRoomLoot(PlayerCharacter pc) {
 
         /// Method to generate if a room has loot and if so, what kind, drawing from the database with SQL statements
 
-        int lootType = (int)(Math.random() * 4) + 1;
+        int lootType = (int)((Math.random() * 4) + 1);
 
         switch (lootType) {
 
@@ -146,7 +153,7 @@ public class Room {
 
             /// Armor
             case 2:
-                // Instantiate trinket
+                // Instantiate armor
                 Armor armor = new Armor();
                 // Generate it
                 armor.generateArmor(pc);
@@ -156,7 +163,7 @@ public class Room {
 
             /// Weapon
             case 3:
-                // Instantiate trinket
+                // Instantiate weapon
                 Weapon weapon = new Weapon();
                 // Generate it
                 weapon.generateWeapon(pc);
@@ -212,7 +219,7 @@ public class Room {
 
             // If there are monsters in the room, the player must take action immediately
             // Otherwise, they are free to roam about and inspect the room
-            if (!this.getMonsters().isEmpty()) {
+            if (!this.getMonsters().isEmpty() && this.getDeadCount() < this.getMonsters().size()) {
                 System.out.println("You are not alone. You see " + this.getTheme() + "!");
                 System.out.println("What do you do? They have not spotted you yet.");
                 System.out.println("1. Attack");
@@ -441,21 +448,6 @@ public class Room {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
 
             // Set up the connection with the DB
             connection = DriverManager
@@ -750,9 +742,9 @@ public class Room {
         // a) the player is dead
         // b) all the monsters in the room are dead
         // c) the player flees (breaks the loop from within)
-        while (pc.getHealth() > 0 && !this.getMonsters().isEmpty()) {
+        while (pc.getHealth() > 0 && !this.getMonsters().isEmpty() && this.getDeadCount() < this.getMonsters().size()) {
 
-            if (this.getMonsters().isEmpty()) {
+            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size()) {
                 break;
             }
 
@@ -787,19 +779,30 @@ public class Room {
 
                 for (int i = 0; i < this.getMonsters().size(); i++) {
                     if (!this.getMonsters().isEmpty()
+                            && this.getDeadCount() < this.getMonsters().size()
                             && this.getMonsters().get(i).getInitiative() <= pc.getInitiative()
                             && playerTurnCount <= (this.getMonsters().size() / 2)) {
                         playerTurnCount++;
                         this.playerTurn(pc);
-                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null && !this.getMonsters().get(i).isDead()) {
+                        if (!this.getMonsters().isEmpty()
+                                && this.getDeadCount() < this.getMonsters().size()
+                                && this.getMonsters().get(i) != null
+                                && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
-                        } else if (!this.getMonsters().isEmpty() && !this.getMonsters().get(i).isDead()) {
+                        } else if (!this.getMonsters().isEmpty()
+                                && this.getDeadCount() < this.getMonsters().size()
+                                && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
                         }
                     } else {
-                        if (!this.getMonsters().isEmpty() && this.getMonsters().get(i) != null && !this.getMonsters().get(i).isDead()) {
+                        if (!this.getMonsters().isEmpty()
+                                && this.getDeadCount() < this.getMonsters().size()
+                                && this.getMonsters().get(i) != null
+                                && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
-                        } else if (!this.getMonsters().isEmpty() && !this.getMonsters().get(i).isDead()) {
+                        } else if (!this.getMonsters().isEmpty()
+                                && this.getDeadCount() < this.getMonsters().size()
+                                && !this.getMonsters().get(i).isDead()) {
                             this.enemyTurn(pc, this.getMonsters().get(i));
                         }
                         playerTurnCount++;
@@ -813,7 +816,7 @@ public class Room {
                         this.getMonsters().get(j).clearFlags();
                     }
 
-                    if (this.getMonsters().isEmpty()) {
+                    if (this.getDeadCount() == this.getMonsters().size()) {
                         System.out.println("You have defeated your enemies!");
                         pc.levelUp();
                         this.setCleared(true);
@@ -861,15 +864,20 @@ public class Room {
             }
 
             // Break loop if we somehow got in here while the room is empty
-            if (this.getMonsters().isEmpty()) {
+            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size()) {
                 break;
             }
 
             // Print out the toString() of each monster in the room, if it's not null and the player is alive.
-            if (this.getMonsters() != null && !this.getMonsters().isEmpty() && pc.getHealth() > 0) {
-                System.out.println("There are " + this.getMonsters().size() + " enemies before you.");
+            if (this.getMonsters() != null
+                    && !this.getMonsters().isEmpty()
+                    && this.getDeadCount() < this.getMonsters().size()
+                    && pc.getHealth() > 0) {
+                System.out.println("There are " + (this.getMonsters().size() - this.getDeadCount()) + " enemies before you.");
                 for (int i = 0; i < this.getMonsters().size(); i++) {
-                    System.out.println(this.getMonsters().get(i).toString());
+                    if (!this.getMonsters().get(i).isDead()) {
+                        System.out.println(this.getMonsters().get(i).toString());
+                    }
                 }
             }
 
@@ -959,8 +967,10 @@ public class Room {
         while (attacking) {
             System.out.println("Which foe will you strike?");
             for (int i = 0; i < this.getMonsters().size(); i++) {
-                System.out.println(i + 1 + ". " + this.getMonsters().get(i).getName()
-                        + ": " + this.getMonsters().get(i).getHealth() + " Health");
+                if (!this.getMonsters().get(i).isDead()) {
+                    System.out.println(i + 1 + ". " + this.getMonsters().get(i).getName()
+                            + ": " + this.getMonsters().get(i).getHealth() + " Health");
+                }
             }
             System.out.println("If you do not wish to attack, type \"0\" to change your decision.");
 
@@ -997,12 +1007,13 @@ public class Room {
                                 // Make sure the move choice is valid
                             } else if ((pc.getMoves().get((moveChoice - 1)) != null)) {
                                 // Do the move, call methods and calculate damage.
-                                // If it returns true, the monster is slain and removed from the arraylist
+                                // If it returns true, the monster is slain and set as dead
                                 // and the initiative order
                                 if (playerDoDamage(pc,
                                         this.getMonsters().get((attackChoice - 1)),
                                         pc.getMoves().get((moveChoice - 1)))) {
                                     this.getMonsters().get((attackChoice - 1)).setDead(true);
+                                    this.setDeadCount(this.getDeadCount() + 1);
                                 }
 
                                 // End loop and return true to the main doBattle method so the player's turn ends
@@ -1199,11 +1210,13 @@ public class Room {
                         System.out.println(pc.stats());
                         continue;
                     case 3:
-                        if (!this.getMonsters().isEmpty()) {
+                        if (!this.getMonsters().isEmpty() && this.getDeadCount() < this.getMonsters().size()) {
                             for (int i = 0; i < this.getMonsters().size(); i++) {
-                                System.out.println(this.getMonsters().get(i).toString());
+                                if (!this.getMonsters().get(i).isDead()) {
+                                    System.out.println(this.getMonsters().get(i).toString());
+                                }
                             }
-                        } else if (this.getMonsters().isEmpty() ^ this.getMonsters() == null) {
+                        } else if (this.getMonsters().isEmpty() ^ this.getMonsters() == null ^ this.getDeadCount() >= this.getMonsters().size()) {
                             System.out.println("You have no foes in this room!");
                             continue;
                         }
@@ -1218,7 +1231,7 @@ public class Room {
                         /// TRINKET
                         if (this.getRoomTrinket() != null) {
                             System.out.println("You spot a trinket in the room.");
-                            if (this.getMonsters().isEmpty() ^ hiding) {
+                            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size() ^ hiding) {
                                 System.out.println("Would you like to collect it?");
                                 System.out.println("1. Yes");
                                 System.out.println("2. No");
@@ -1245,12 +1258,14 @@ public class Room {
                                     }
                                 }
                             }
+                        } else {
+                            System.out.println("You see no trinkets worth taking in this room.");
                         }
 
                         /// WEAPON
                         if (this.getRoomWeapon() != null) {
                             System.out.println("You spot a weapon in the room.");
-                            if (this.getMonsters().isEmpty() ^ hiding) {
+                            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size() ^ hiding) {
                                 System.out.println("Would you like to collect it?");
                                 System.out.println("1. Yes");
                                 System.out.println("2. No");
@@ -1277,12 +1292,14 @@ public class Room {
                                     }
                                 }
                             }
+                        } else {
+                            System.out.println("You see no weapons worth taking in this room.");
                         }
 
                         /// ARMOR
                         if (this.getRoomArmor() != null) {
                             System.out.println("You spot some armor in the room.");
-                            if (this.getMonsters().isEmpty() ^ hiding) {
+                            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size() ^ hiding) {
                                 System.out.println("Would you like to collect it?");
                                 System.out.println("1. Yes");
                                 System.out.println("2. No");
@@ -1309,12 +1326,14 @@ public class Room {
                                     }
                                 }
                             }
+                        } else {
+                            System.out.println("You see no armor worth taking in this room.");
                         }
 
                         /// POTIONS
                         if (this.getPotions() > 0) {
                             System.out.println("You spot some potions in the room.");
-                            if (this.getMonsters().isEmpty() ^ hiding) {
+                            if (this.getMonsters().isEmpty() ^ this.getDeadCount() >= this.getMonsters().size() ^ hiding) {
                                 System.out.println("Would you like to collect the potions?");
                                 System.out.println("1. Yes");
                                 System.out.println("2. No");
@@ -1338,6 +1357,8 @@ public class Room {
                                     }
                                 }
                             }
+                        } else {
+                            System.out.println("You see no potions in this room.");
                         }
 
                         continue;
@@ -1670,21 +1691,6 @@ public class Room {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
 
             // Set up the connection with the DB
             connection = DriverManager

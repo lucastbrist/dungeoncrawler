@@ -1,14 +1,11 @@
 package DungeonCrawler.models;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
+import static DungeonCrawler.controllers.DungeonCrawlController.StringStore.connectionString;
 
 public class Trinket {
 
@@ -174,19 +171,6 @@ public class Trinket {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
 
             // Set up the connection with the DB
             connection = DriverManager
@@ -196,7 +180,12 @@ public class Trinket {
                 // Generate a number for a 1 in 3 chance to add or subtract 1 from the levels to pull from, for some wiggle room
                 int generatedModifier = (int) ((Math.random() * 3) + 1);
                 // If statement to interpret the result as -1, 0, or +1
-                if (generatedModifier == 1) {
+
+                // If the player is level 1, sanitize the SQL statement so we don't produce errors by searching for
+                // trinkets "between 1 and 0"
+                if (pc.getLevel() == 1 && generatedModifier == 1) {
+                    generatedModifier = 0;
+                } else if (generatedModifier == 1) {
                     generatedModifier = -1;
                 } else if (generatedModifier == 2) {
                     generatedModifier = 0;

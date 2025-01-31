@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
+import static DungeonCrawler.controllers.DungeonCrawlController.StringStore.connectionString;
 
 public class PlayerCharacter {
 
@@ -1373,10 +1374,6 @@ public class PlayerCharacter {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            String connectionString = "jdbc:mysql://localhost/dungeoncrawler?"
-                    + "user=root&password=SQLsAreUsuallyW0rse!"
-                    + "&useSSL=false&allowPublicKeyRetrieval=true";
 
             // Set up the connection with the DB
             connection = DriverManager

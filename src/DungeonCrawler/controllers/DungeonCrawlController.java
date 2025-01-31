@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static DungeonCrawler.controllers.DungeonCrawlController.StringStore.connectionString;
+
 public class DungeonCrawlController {
 
     public static void main(String[] args) {
@@ -43,6 +45,21 @@ public class DungeonCrawlController {
                 "|   :    /:   : :-' |  | ,'           :   '  |--\"'---'    |   :   .:   : :-'   \n" +
                 " \\   \\ .' |   |.'   `--''              \\   \\ ;            |   | ,' |   |.'     \n" +
                 "  `---`   `---'                         '---\"             `----'   `---'       \n");
+
+        // Read the contents of connectionString.txt. We need this a lot.
+        String readPath = "src/connectionString.txt";
+        String connectionString = "";
+        try {
+            File file = new File(readPath);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String string;
+            while ((string = bufferedReader.readLine()) != null) {
+                connectionString = string;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        StringStore.setConnectionString(connectionString);
 
         /// Create an instance of a Player
         Player player = new Player();
@@ -497,21 +514,6 @@ public class DungeonCrawlController {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
-
             // Set up the connection with the DB
             connection = DriverManager
                     .getConnection(connectionString);
@@ -667,21 +669,6 @@ public class DungeonCrawlController {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
 
             // Set up the connection with the DB
             connection = DriverManager
@@ -858,19 +845,6 @@ public class DungeonCrawlController {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
 
             // Set up the connection with the DB
             connection = DriverManager
@@ -1287,19 +1261,6 @@ public class DungeonCrawlController {
         try {
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Read in some text
-            String readPath = "src/data/connectionString.txt";
-            String connectionString = "";
-            try {
-                File file = new File(readPath);
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string;
-                while ((string = bufferedReader.readLine()) != null) {
-                    connectionString = string;
-                }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
 
             // Set up the connection with the DB
             connection = DriverManager
@@ -1434,6 +1395,19 @@ public class DungeonCrawlController {
 
         System.exit(0);
 
+    }
+
+    public static final class StringStore {
+
+        public static String connectionString;
+
+        public String getConnectionString() {
+            return connectionString;
+        }
+
+        public static void setConnectionString(String NewConnectionString) {
+            connectionString = NewConnectionString;
+        }
     }
 
 }
