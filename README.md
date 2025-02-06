@@ -17,7 +17,7 @@ Between rooms, you'll level up, and by the end of the dungeon, you may either re
 * MySQL and MySQL Workbench
 * The JDBC MySQL Connector located here (select "Platform Independent" fom the dropdown): https://dev.mysql.com/downloads/connector/j/
   
-###Step-by-Step
+### Step-by-Step
 1. To begin, clone this github repository onto your machine and extract it.
 2. Using MySQL Workbench, create a server and import the schema included in dungeoncrawler/data called "dungeoncrawler.sql." This should create the database the game will need to run.
 3. Then, in the DungeonCrawler/src folder, create a txt file named `connectionString`. In it, paste the following and only the following using any text editor: `jdbc:mysql://localhost/dungeoncrawler?user=username&password=password&useSSL=false&allowPublicKeyRetrieval=true`. Replace the "username" and "password" fields with that of your MySQL database server. If your server is not hosted at the same address, you will also have to change the `localhost` field.
