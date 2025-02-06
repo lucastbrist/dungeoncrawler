@@ -2,7 +2,7 @@
 A proof-of-concept old-school text-based fantasy dungeon-crawler written in Java.
 
 ## About
-Remember Zork? Remember the newer dungeoncrawlers inspired by it but taking it to the next leevel with 3D graphics, such as Legend of Grimrock? Remember parodies of Zork in popular media, like the functional Thy Dungeonman game hosted on the old homestarrunner.com website of the early 'aughts? 
+Remember Zork? Remember the newer dungeoncrawlers inspired by it but taking it to the next level with 3D graphics, such as Legend of Grimrock? Remember parodies of Zork in popular media, like the functional Thy Dungeonman game hosted on the old homestarrunner.com website of the early 'aughts? 
 
 Well this isn't as cool as any of those.
 
