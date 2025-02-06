@@ -16,6 +16,7 @@ Between rooms, you'll level up, and by the end of the dungeon, you may either re
 * A Java IDE such as IntelliJ IDEA
 * MySQL and MySQL Workbench
 * The JDBC MySQL Connector located here (select "Platform Independent" fom the dropdown): https://dev.mysql.com/downloads/connector/j/
+  
 ###Step-by-Step
 1. To begin, clone this github repository onto your machine and extract it.
 2. Using MySQL Workbench, create a server and import the schema included in dungeoncrawler/data called "dungeoncrawler.sql." This should create the database the game will need to run.
