@@ -676,7 +676,7 @@ public class DungeonCrawlController {
             statement = connection.createStatement();
 
                 resultSet = statement
-                        .executeQuery("select * from dungeoncrawler." + theme);
+                        .executeQuery("select * from dungeoncrawler." + theme.toLowerCase());
 
                 // loop through the result set while there are more records
                 while (resultSet.next()) {
@@ -852,7 +852,7 @@ public class DungeonCrawlController {
             statement = connection.createStatement();
 
             resultSet = statement
-                    .executeQuery("select * from dungeoncrawler." + theme);
+                    .executeQuery("select * from dungeoncrawler." + theme.toLowerCase());
 
             // loop through the result set while there are more records
             while (resultSet.next()) {
@@ -1268,7 +1268,7 @@ public class DungeonCrawlController {
             statement = connection.createStatement();
 
             resultSet = statement
-                    .executeQuery("select * from dungeoncrawler." + theme);
+                    .executeQuery("select * from dungeoncrawler." + theme.toLowerCase());
 
             // loop through the result set while there are more records
             while (resultSet.next()) {
