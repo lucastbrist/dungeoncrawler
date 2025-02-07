@@ -297,64 +297,64 @@ public class DungeonCrawlController {
                 switch (choice) {
 
                     case 1:
-                        theme = "Automatons";
+                        theme = "automatons";
                         break;
                     case 2:
-                        theme = "Bandits";
+                        theme = "bandits";
                         break;
                     case 3:
-                        theme = "Beasts";
+                        theme = "beasts";
                         break;
                     case 4:
-                        theme = "Demons";
+                        theme = "demons";
                         break;
                     case 5:
-                        theme = "Deserters";
+                        theme = "deserters";
                         break;
                     case 6:
-                        theme = "Fae";
+                        theme = "fae";
                         break;
                     case 7:
-                        theme = "Flooded";
+                        theme = "flooded";
                         break;
                     case 8:
-                        theme = "Ghosts";
+                        theme = "ghosts";
                         break;
                     case 9:
-                        theme = "Goblins";
+                        theme = "goblins";
                         break;
                     case 10:
-                        theme = "Golems";
+                        theme = "golems";
                         break;
                     case 11:
-                        theme = "Mages";
+                        theme = "mages";
                         break;
                     case 12:
-                        theme = "Oozes";
+                        theme = "oozes";
                         break;
                     case 13:
-                        theme = "Pirates";
+                        theme = "pirates";
                         break;
                     case 14:
-                        theme = "Plants";
+                        theme = "plants";
                         break;
                     case 15:
-                        theme = "Skeletons";
+                        theme = "skeletons";
                         break;
                     case 16:
-                        theme = "Spiders";
+                        theme = "spiders";
                         break;
                     case 17:
-                        theme = "Vampires";
+                        theme = "vampires";
                         break;
                     case 18:
-                        theme = "Void Creatures";
+                        theme = "void Creatures";
                         break;
                     case 19:
-                        theme = "Wild Men";
+                        theme = "wild Men";
                         break;
                     case 20:
-                        theme = "Zombies";
+                        theme = "zombies";
                         break;
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
@@ -586,64 +586,64 @@ public class DungeonCrawlController {
                 switch (choice) {
 
                     case 1:
-                        theme = "Automatons";
+                        theme = "automatons";
                         break;
                     case 2:
-                        theme = "Bandits";
+                        theme = "bandits";
                         break;
                     case 3:
-                        theme = "Beasts";
+                        theme = "beasts";
                         break;
                     case 4:
-                        theme = "Demons";
+                        theme = "demons";
                         break;
                     case 5:
-                        theme = "Deserters";
+                        theme = "deserters";
                         break;
                     case 6:
-                        theme = "Fae";
+                        theme = "fae";
                         break;
                     case 7:
-                        theme = "Flooded";
+                        theme = "flooded";
                         break;
                     case 8:
-                        theme = "Ghosts";
+                        theme = "ghosts";
                         break;
                     case 9:
-                        theme = "Goblins";
+                        theme = "goblins";
                         break;
                     case 10:
-                        theme = "Golems";
+                        theme = "golems";
                         break;
                     case 11:
-                        theme = "Mages";
+                        theme = "mages";
                         break;
                     case 12:
-                        theme = "Oozes";
+                        theme = "oozes";
                         break;
                     case 13:
-                        theme = "Pirates";
+                        theme = "pirates";
                         break;
                     case 14:
-                        theme = "Plants";
+                        theme = "plants";
                         break;
                     case 15:
-                        theme = "Skeletons";
+                        theme = "skeletons";
                         break;
                     case 16:
-                        theme = "Spiders";
+                        theme = "spiders";
                         break;
                     case 17:
-                        theme = "Vampires";
+                        theme = "vampires";
                         break;
                     case 18:
-                        theme = "Void Creatures";
+                        theme = "void Creatures";
                         break;
                     case 19:
-                        theme = "Wild Men";
+                        theme = "wild Men";
                         break;
                     case 20:
-                        theme = "Zombies";
+                        theme = "zombies";
                         break;
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
@@ -762,64 +762,64 @@ public class DungeonCrawlController {
                 switch (choice) {
 
                     case 1:
-                        theme = "Automatons";
+                        theme = "automatons";
                         break;
                     case 2:
-                        theme = "Bandits";
+                        theme = "bandits";
                         break;
                     case 3:
-                        theme = "Beasts";
+                        theme = "beasts";
                         break;
                     case 4:
-                        theme = "Demons";
+                        theme = "demons";
                         break;
                     case 5:
-                        theme = "Deserters";
+                        theme = "deserters";
                         break;
                     case 6:
-                        theme = "Fae";
+                        theme = "fae";
                         break;
                     case 7:
-                        theme = "Flooded";
+                        theme = "flooded";
                         break;
                     case 8:
-                        theme = "Ghosts";
+                        theme = "ghosts";
                         break;
                     case 9:
-                        theme = "Goblins";
+                        theme = "goblins";
                         break;
                     case 10:
-                        theme = "Golems";
+                        theme = "golems";
                         break;
                     case 11:
-                        theme = "Mages";
+                        theme = "mages";
                         break;
                     case 12:
-                        theme = "Oozes";
+                        theme = "oozes";
                         break;
                     case 13:
-                        theme = "Pirates";
+                        theme = "pirates";
                         break;
                     case 14:
-                        theme = "Plants";
+                        theme = "plants";
                         break;
                     case 15:
-                        theme = "Skeletons";
+                        theme = "skeletons";
                         break;
                     case 16:
-                        theme = "Spiders";
+                        theme = "spiders";
                         break;
                     case 17:
-                        theme = "Vampires";
+                        theme = "vampires";
                         break;
                     case 18:
-                        theme = "Void Creatures";
+                        theme = "void Creatures";
                         break;
                     case 19:
-                        theme = "Wild Men";
+                        theme = "wild Men";
                         break;
                     case 20:
-                        theme = "Zombies";
+                        theme = "zombies";
                         break;
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
@@ -1178,64 +1178,64 @@ public class DungeonCrawlController {
                 switch (choice) {
 
                     case 1:
-                        theme = "Automatons";
+                        theme = "automatons";
                         break;
                     case 2:
-                        theme = "Bandits";
+                        theme = "bandits";
                         break;
                     case 3:
-                        theme = "Beasts";
+                        theme = "beasts";
                         break;
                     case 4:
-                        theme = "Demons";
+                        theme = "demons";
                         break;
                     case 5:
-                        theme = "Deserters";
+                        theme = "deserters";
                         break;
                     case 6:
-                        theme = "Fae";
+                        theme = "fae";
                         break;
                     case 7:
-                        theme = "Flooded";
+                        theme = "flooded";
                         break;
                     case 8:
-                        theme = "Ghosts";
+                        theme = "ghosts";
                         break;
                     case 9:
-                        theme = "Goblins";
+                        theme = "goblins";
                         break;
                     case 10:
-                        theme = "Golems";
+                        theme = "golems";
                         break;
                     case 11:
-                        theme = "Mages";
+                        theme = "mages";
                         break;
                     case 12:
-                        theme = "Oozes";
+                        theme = "oozes";
                         break;
                     case 13:
-                        theme = "Pirates";
+                        theme = "pirates";
                         break;
                     case 14:
-                        theme = "Plants";
+                        theme = "plants";
                         break;
                     case 15:
-                        theme = "Skeletons";
+                        theme = "skeletons";
                         break;
                     case 16:
-                        theme = "Spiders";
+                        theme = "spiders";
                         break;
                     case 17:
-                        theme = "Vampires";
+                        theme = "vampires";
                         break;
                     case 18:
-                        theme = "Void Creatures";
+                        theme = "void Creatures";
                         break;
                     case 19:
-                        theme = "Wild Men";
+                        theme = "wild Men";
                         break;
                     case 20:
-                        theme = "Zombies";
+                        theme = "zombies";
                         break;
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
