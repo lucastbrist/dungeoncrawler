@@ -519,7 +519,7 @@ public class DungeonCrawlController {
                     .getConnection(connectionString);
             statement = connection.createStatement();
 
-            String sql = "INSERT INTO dungeoncrawler." + theme + " (name, description, type, tier, health, damage, armor) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO dungeoncrawler." + theme.toLowerCase() + " (name, description, type, tier, health, damage, armor) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, description);
@@ -690,7 +690,7 @@ public class DungeonCrawlController {
                     int damage = resultSet.getInt("Damage");
                     int armor = resultSet.getInt("Armor");
 
-                    monsters.add(new Monster(name, description, theme, type, tier, health, damage, armor));
+                    monsters.add(new Monster(name, description, theme.toLowerCase(), type, tier, health, damage, armor));
                     for (int i = 0; i < monsters.size(); i++) {
                         System.out.println("There is a " + monsters.get(i).getName() + ". "
                                 + "\n "
