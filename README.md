@@ -23,7 +23,7 @@ Between rooms, you'll level up, and by the end of the dungeon, you may either re
 3. Then, in the DungeonCrawler/src folder, create a file named `connectionString.txt`. In it, paste the following and only the following using any text editor: `jdbc:mysql://localhost/dungeoncrawler?user=username&password=password&useSSL=false&allowPublicKeyRetrieval=true`. Replace the `username` and `password` fields with that of your MySQL database server. If your server is not hosted at the same address, you will also have to change the `localhost` field.
 4. Create a new project in your IDE. In IntelliJ, click on `File`, then `New`, then `Project from Existing Sources` and browse to where you extracted the repository.
 5. Ensure that MySQL Server is running. On Windows, you can do this by pressing `WIN + R` and typing `services` and then hitting `ENTER`, then browsing until you find `MySQL180`, right-clicking, and pressing `Start`.
-6. Open `dungeoncrawler/src/controllers/dungeoncrawlercontroller.java` in your IDE and run it! The command line should open, and you will be prompted to play being entering text!
+6. Open `dungeoncrawler/src/controllers/dungeoncrawlercontroller.java` in your IDE and run it! The command line should open, and you will be prompted to play and begin entering text!
 7. After entering your username, you will be asked to enter anything to continue. If you type, in all caps, `CRUD`, you will enter a special back-end mode to create, read, update, and delete data from the MySQL schema the game gets its data from. Otherwise, type anything else, and the game will begin!
 
 ## How to Play
