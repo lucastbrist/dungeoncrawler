@@ -73,14 +73,14 @@ public class DungeonCrawlController {
         player.setUsername(scanner.nextLine());
         System.out.println("Greetings, " + player.getUsername() + ".");
 
-        /// Wait for an input to begin.
-        // Secretly, this allows the player to create, read, update, or delete data if they type in CRUD
-        System.out.println("Enter anything to begin.");
-
         boolean entering = true;
         Scanner entryScanner = new Scanner(System.in);
 
         while (entering) {
+
+            /// Wait for an input to begin.
+            // Secretly, this allows the player to create, read, update, or delete data if they type in CRUD
+            System.out.println("Enter anything to begin.");
 
             String entry = entryScanner.nextLine();
 
@@ -236,11 +236,11 @@ public class DungeonCrawlController {
                     case 4:
                         deleteMonsters();
                         break;
+                    case 0:
+                        return;
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
                         continue;
-                    case 0:
-                        return;
 
                 }
 
