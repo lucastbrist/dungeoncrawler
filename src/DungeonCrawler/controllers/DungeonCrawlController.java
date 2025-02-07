@@ -160,7 +160,8 @@ public class DungeonCrawlController {
             System.out.println("3. Trinkets");
             System.out.println("4. Armors");
             System.out.println("5. Weapons");
-            System.out.println("Or enter 0 to restore a backup.");
+            System.out.println("Or enter 6 to restore a backup.");
+            System.out.println("Press 0 to return to the main menu.");
 
             try {
 
@@ -183,8 +184,10 @@ public class DungeonCrawlController {
                 case 5:
                     // crudWeapons();
                     break;
-                case 0:
+                case 6:
                     // crudRestore();
+                case 0:
+                    return;
                 default:
                     System.out.println("You have entered an invalid choice. Please try again.");
                     continue;
@@ -236,6 +239,8 @@ public class DungeonCrawlController {
                     default:
                         System.out.println("You have entered an invalid choice. Please try again.");
                         continue;
+                    case 0:
+                        return;
 
                 }
 
